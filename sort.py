@@ -6,9 +6,7 @@ def BUBBLE_ASC(arr):
         swp = False
         for i in range(len(arr)-1):
             if arr[i] > arr[i+1]:
-                tmp = arr[i]
-                arr[i] = arr[i+1]
-                arr[i+1] = tmp
+                arr[i], arr[i+1] = arr[i+1], arr[i]
                 swp = True
                 a+=1
         if not swp:
@@ -22,9 +20,7 @@ def BUBBLE_DESC(arr):
         swp = False
         for i in range(len(arr)-1):
             if arr[i] < arr[i+1]:
-                tmp = arr[i]
-                arr[i] = arr[i+1]
-                arr[i+1] = tmp
+                arr[i], arr[i+1] = arr[i+1], arr[i]
                 swp = True
                 a+=1
         if not swp:
@@ -42,9 +38,7 @@ def SELECT_ASC(arr):
                 min_idx = j  
         
         if min_idx != i:
-            tmp = arr[i]
-            arr[i] = arr[min_idx]
-            arr[min_idx] = tmp
+            arr[i], arr[min_idx] = arr[min_idx], arr[i]
             a += 1 
             
     return f"선택 오름차순: {arr}, 정렬 횟수: {a}"
@@ -58,9 +52,7 @@ def SELECT_DESC(arr):
                 max_idx = j
         
         if max_idx != i:
-            tmp = arr[i]
-            arr[i] = arr[max_idx]
-            arr[max_idx] = tmp
+            arr[i], arr[max_idx] = arr[max_idx], arr[i]
             a+=1
             
     return f"선택 내림차순: {arr}, 정렬 횟수: {a}"
