@@ -1,8 +1,8 @@
 for i in range(3):
     print("3번 반복")
     t = input("팀 명: ")
-    sm = input("회의 시작 시간: ")
-    em = input("회의 종료 시간: ")
+    sm = int(input("회의 시작 시간: "))
+    em = int(input("회의 종료 시간: "))
 
     m = []
 
@@ -12,11 +12,15 @@ for i in range(3):
     if em > 12:
         em -= 12
     
-    m.append((t, sm, em))
+    m.append(t, sm, em)
 
-result = []
+
+m.sort(x= lambda x: x[2])
+    
+
 
 for i in range(3):
-    if m[0][2]==m
+    print(f"{i+1}번: {m[i][0]}")
+
 
     
