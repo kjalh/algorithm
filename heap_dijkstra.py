@@ -1,3 +1,5 @@
+import heapq
+
 graph = {
     'A': [('B', 7), ('C', 3), ('D', 10)],
     'B': [('A', 7), ('E', 2), ('F', 6)],
@@ -15,36 +17,40 @@ def dijkstra(graph, start):
     dis = {node: float('inf') for node in graph}
     dis[start] = 0
     q = [(0, start)]
+    
+    path = {node: None for node in graph}
 
     while True:
         if len(q) == 0:
             break
 
-        min_idx = 0
-        for i in range(1, len(q)):
-            if q[i][0] < q[min_idx][0]:
-                min_idx = i
-        
-        c_dist, c_node = q.pop(min_idx)
-
+        c_dist, c_node = heapq.heappop(q)
         
         if c_dist > dis[c_node]:
             continue
 
         for near, weight in graph[c_node]:
-            new_distance = c_dist + weight
+            new_dis = c_dist + weight
             
-            if new_distance < dis[near]:
-                dis[near] = new_distance  
-                q.append((new_distance, near))  
-    return dis
+            if new_dis < dis[near]:
+                dis[near] = new_dis
+                path[near] = c_node
+                heapq.heappush(q, (new_dis, near))  
+                
+    return dis, path
 
 
-start = input("시작점(A-J): ")
-result = dijkstra(graph, start)
+start = input("시작점(A-J): ").upper()
+result_dis, result_path = dijkstra(graph, start)
 
-print()
-
-print(f"시작점 {start}로부터의 최단 거리 결과")
-for node in result:
-    print(f"정점 {node} 까지의 최단 거리: {result[node]}")
+for node in result_dis:
+    dis = []
+    cur = node
+    
+    while cur is not None:
+        dis.append(cur)
+        cur = result_path[cur]
+    
+    real_dis = " -> ".join(dis[::-1])
+    
+    print(f"정점 {node} 까지의 최단 거리: {result_dis[node]} | 실제 경로: {real_dis}")
