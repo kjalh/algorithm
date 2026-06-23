@@ -9,7 +9,12 @@ graph = {
     'H': {}
 }
 
+def dijkstra():
+    head = graph[0]
 
+    
+
+    pass
 
 
 
